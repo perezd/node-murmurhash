@@ -15,7 +15,7 @@ More information about these algorithms can be found at:
 
 Install it in your browser:
 
-```
+```html
 <script type="text/javascript" src="murmurhash.js"></script>
 ```
 
