@@ -1,0 +1,14 @@
+{
+  "name" : "murmurhash",
+  "version" : "0.0.1",
+  "description" : "A Node.js module for the optimized JavaScript implementation of the MurmurHash algorithms.",
+  "author": {
+    "Gary Court": "gary.court@gmail.com",
+    "Derek Perez": "derek@derekperez.com"
+  },
+  "main": "murmurhash",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/perezd/node-murmurhash.git"
+  }
+}
