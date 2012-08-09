@@ -115,9 +115,9 @@
     return h1 >>> 0;
   }
 
-  var murmur = v3;
-  murmur.v2 = v2;
-  murmur.v3 = v3;
+  var murmur = MurmurHashV3;
+  murmur.v2 = MurmurHashV2;
+  murmur.v3 = MurmurHashV3;
 
   if (typeof(module) != 'undefined') {
     module.exports = murmur;
