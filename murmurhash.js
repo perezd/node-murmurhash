@@ -13,7 +13,7 @@
    * @param {number} seed Positive integer only
    * @return {number} 32-bit positive integer hash
    */
-  function v2(str, seed) {
+  function MurmurHashV2(str, seed) {
     var
       l = str.length,
       h = seed ^ l,
@@ -63,7 +63,7 @@
    * @param {number} seed Positive integer only
    * @return {number} 32-bit positive integer hash
    */
-  function v3(key, seed) {
+  function MurmurHashV3(key, seed) {
     var remainder, bytes, h1, h1b, c1, c1b, c2, c2b, k1, i;
 
     remainder = key.length & 3; // key.length % 4
