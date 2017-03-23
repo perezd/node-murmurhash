@@ -33,10 +33,10 @@ Both version 2 and 3 of the MurmurHash algorithm are supported:
 
 ```js
 // generates a v2 hash
-murmurhash.v2("some input")
+murmurhash.v2("some input", "some seed value (optional)")
 
 // generates a v3 hash
-murmurhash.v3("some input")
+murmurhash.v3("some input", "some seed value (optional)")
 ```
 
 ## License (MIT)
