@@ -1,6 +1,12 @@
 (function(){
   var _global = this;
 
+  const createBuffer =
+    Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow
+      ? Buffer.from
+      : // support for Node < 5.10
+        val => new Buffer(val);
+
   /**
    * JS Implementation of MurmurHash2
    *
@@ -9,11 +15,12 @@
    * @author <a href="mailto:aappleby@gmail.com">Austin Appleby</a>
    * @see http://sites.google.com/site/murmurhash/
    *
-   * @param {string} str ASCII only
+   * @param {Buffer} str ASCII only
    * @param {number} seed Positive integer only
    * @return {number} 32-bit positive integer hash
    */
   function MurmurHashV2(str, seed) {
+    if (!Buffer.isBuffer(str)) str = createBuffer(str);
     var
       l = str.length,
       h = seed ^ l,
@@ -22,10 +29,10 @@
 
     while (l >= 4) {
       k =
-        ((str.charCodeAt(i) & 0xff)) |
-        ((str.charCodeAt(++i) & 0xff) << 8) |
-        ((str.charCodeAt(++i) & 0xff) << 16) |
-        ((str.charCodeAt(++i) & 0xff) << 24);
+        ((str[i] & 0xff)) |
+        ((str[++i] & 0xff) << 8) |
+        ((str[++i] & 0xff) << 16) |
+        ((str[++i] & 0xff) << 24);
 
       k = (((k & 0xffff) * 0x5bd1e995) + ((((k >>> 16) * 0x5bd1e995) & 0xffff) << 16));
       k ^= k >>> 24;
@@ -38,9 +45,9 @@
     }
 
     switch (l) {
-    case 3: h ^= (str.charCodeAt(i + 2) & 0xff) << 16;
-    case 2: h ^= (str.charCodeAt(i + 1) & 0xff) << 8;
-    case 1: h ^= (str.charCodeAt(i) & 0xff);
+    case 3: h ^= (str[i + 2] & 0xff) << 16;
+    case 2: h ^= (str[i + 1] & 0xff) << 8;
+    case 1: h ^= (str[i] & 0xff);
             h = (((h & 0xffff) * 0x5bd1e995) + ((((h >>> 16) * 0x5bd1e995) & 0xffff) << 16));
     }
 
@@ -59,11 +66,13 @@
    * @author <a href="mailto:aappleby@gmail.com">Austin Appleby</a>
    * @see http://sites.google.com/site/murmurhash/
    *
-   * @param {string} key ASCII only
+   * @param {Buffer} key ASCII only
    * @param {number} seed Positive integer only
    * @return {number} 32-bit positive integer hash
    */
   function MurmurHashV3(key, seed) {
+    if (!Buffer.isBuffer(key)) key = createBuffer(key);
+
     var remainder, bytes, h1, h1b, c1, c1b, c2, c2b, k1, i;
 
     remainder = key.length & 3; // key.length % 4
@@ -75,10 +84,10 @@
 
     while (i < bytes) {
         k1 =
-          ((key.charCodeAt(i) & 0xff)) |
-          ((key.charCodeAt(++i) & 0xff) << 8) |
-          ((key.charCodeAt(++i) & 0xff) << 16) |
-          ((key.charCodeAt(++i) & 0xff) << 24);
+          ((key[i] & 0xff)) |
+          ((key[++i] & 0xff) << 8) |
+          ((key[++i] & 0xff) << 16) |
+          ((key[++i] & 0xff) << 24);
       ++i;
 
       k1 = ((((k1 & 0xffff) * c1) + ((((k1 >>> 16) * c1) & 0xffff) << 16))) & 0xffffffff;
@@ -94,9 +103,9 @@
     k1 = 0;
 
     switch (remainder) {
-      case 3: k1 ^= (key.charCodeAt(i + 2) & 0xff) << 16;
-      case 2: k1 ^= (key.charCodeAt(i + 1) & 0xff) << 8;
-      case 1: k1 ^= (key.charCodeAt(i) & 0xff);
+      case 3: k1 ^= (key[i + 2] & 0xff) << 16;
+      case 2: k1 ^= (key[i + 1] & 0xff) << 8;
+      case 1: k1 ^= (key[i] & 0xff);
 
       k1 = (((k1 & 0xffff) * c1) + ((((k1 >>> 16) * c1) & 0xffff) << 16)) & 0xffffffff;
       k1 = (k1 << 15) | (k1 >>> 17);
