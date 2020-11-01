@@ -1,7 +1,7 @@
 (function(){
   var _global = this;
 
-  const createBuffer = (val)=> new TextEncoder().encode(val)
+  const createBuffer = (val) => new TextEncoder().encode(val)
 
   /**
    * JS Implementation of MurmurHash2
@@ -11,7 +11,7 @@
    * @author <a href="mailto:aappleby@gmail.com">Austin Appleby</a>
    * @see http://sites.google.com/site/murmurhash/
    *
-   * @param {Buffer | Uint8Array | string} str ASCII only
+   * @param {Uint8Array | string} str ASCII only
    * @param {number} seed Positive integer only
    * @return {number} 32-bit positive integer hash
    */
@@ -62,7 +62,7 @@
    * @author <a href="mailto:aappleby@gmail.com">Austin Appleby</a>
    * @see http://sites.google.com/site/murmurhash/
    *
-   * @param {Buffer | Uint8Array | string} key ASCII only
+   * @param {Uint8Array | string} key ASCII only
    * @param {number} seed Positive integer only
    * @return {number} 32-bit positive integer hash
    */
