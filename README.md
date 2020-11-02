@@ -19,6 +19,8 @@ Install it in your browser:
 <script type="text/javascript" src="murmurhash.js"></script>
 ```
 
+To support older browsers you need to use TextEncoder [polyfill](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder#Polyfill)
+
 or in node.js
 
 ```

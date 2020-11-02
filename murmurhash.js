@@ -1,11 +1,7 @@
 (function(){
   var _global = this;
 
-  const createBuffer =
-    Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow
-      ? Buffer.from
-      : // support for Node < 5.10
-        val => new Buffer(val);
+  const createBuffer = (val) => new TextEncoder().encode(val)
 
   /**
    * JS Implementation of MurmurHash2
@@ -15,12 +11,12 @@
    * @author <a href="mailto:aappleby@gmail.com">Austin Appleby</a>
    * @see http://sites.google.com/site/murmurhash/
    *
-   * @param {Buffer} str ASCII only
+   * @param {Uint8Array | string} str ASCII only
    * @param {number} seed Positive integer only
    * @return {number} 32-bit positive integer hash
    */
   function MurmurHashV2(str, seed) {
-    if (!Buffer.isBuffer(str)) str = createBuffer(str);
+    if (typeof str === 'string') str = createBuffer(str);
     var
       l = str.length,
       h = seed ^ l,
@@ -66,12 +62,12 @@
    * @author <a href="mailto:aappleby@gmail.com">Austin Appleby</a>
    * @see http://sites.google.com/site/murmurhash/
    *
-   * @param {Buffer} key ASCII only
+   * @param {Uint8Array | string} key ASCII only
    * @param {number} seed Positive integer only
    * @return {number} 32-bit positive integer hash
    */
   function MurmurHashV3(key, seed) {
-    if (!Buffer.isBuffer(key)) key = createBuffer(key);
+    if (typeof key === 'string') key = createBuffer(key);
 
     var remainder, bytes, h1, h1b, c1, c1b, c2, c2b, k1, i;
 
