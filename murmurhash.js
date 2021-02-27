@@ -117,7 +117,14 @@
     h1 = ((((h1 & 0xffff) * 0xc2b2ae35) + ((((h1 >>> 16) * 0xc2b2ae35) & 0xffff) << 16))) & 0xffffffff;
     h1 ^= h1 >>> 16;
 
-    return h1 >>> 0;
+    h1 = h1 >>> 0;
+
+    if (h1 & 0x80000000 == 0) {
+      return h1;
+    }
+    else {
+      return -( (h1 ^ 0xFFFFFFFF) + 1 )
+    }
   }
 
   var murmur = MurmurHashV3;
