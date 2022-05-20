@@ -1,5 +1,5 @@
 (function(){
-  var _global = this;
+  const _global = this;
 
   const createBuffer = (val) => new TextEncoder().encode(val)
 
@@ -17,7 +17,7 @@
    */
   function MurmurHashV2(str, seed) {
     if (typeof str === 'string') str = createBuffer(str);
-    var
+    let
       l = str.length,
       h = seed ^ l,
       i = 0,
@@ -54,7 +54,7 @@
     return h >>> 0;
   };
 
-  /**
+  /*
    * JS Implementation of MurmurHash3 (r136) (as of May 20, 2011)
    *
    * @author <a href="mailto:gary.court@gmail.com">Gary Court</a>
@@ -69,7 +69,7 @@
   function MurmurHashV3(key, seed) {
     if (typeof key === 'string') key = createBuffer(key);
 
-    var remainder, bytes, h1, h1b, c1, c1b, c2, c2b, k1, i;
+    let remainder, bytes, h1, h1b, c1, c1b, c2, c2b, k1, i;
 
     remainder = key.length & 3; // key.length % 4
     bytes = key.length - remainder;
@@ -120,14 +120,14 @@
     return h1 >>> 0;
   }
 
-  var murmur = MurmurHashV3;
+  const murmur = MurmurHashV3;
   murmur.v2 = MurmurHashV2;
   murmur.v3 = MurmurHashV3;
 
   if (typeof(module) != 'undefined') {
     module.exports = murmur;
   } else {
-    var _previousRoot = _global.murmur;
+    const _previousRoot = _global.murmur;
     murmur.noConflict = function() {
       _global.murmur = _previousRoot;
       return murmur;
