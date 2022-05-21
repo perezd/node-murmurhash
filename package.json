@@ -1,6 +1,6 @@
 {
   "name" : "murmurhash",
-  "version" : "1.0.0",
+  "version" : "2.0.1",
   "description" : "A Node.js module for the optimized JavaScript implementation of the MurmurHash algorithms.",
   "authors": {
     "Gary Court": "gary.court@gmail.com",
