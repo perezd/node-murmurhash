@@ -28,12 +28,12 @@ npm install murmurhash
 ```
 
 ```js
-murmurhash = require('murmurhash')
+const murmurhash = require('murmurhash');
 ```
 or
 
 ```js
-import murmurhash from 'murmurhash'
+import murmurhash from 'murmurhash';
 ```
 
 Both version 2 and 3 of the MurmurHash algorithm are supported:
