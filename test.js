@@ -10,4 +10,4 @@ if (
   fromStr !== 3017643002
 ) {
   throw new Error(`Wrong output`);
-}
+} else console.dir('Test ended with cought 0 errors');
